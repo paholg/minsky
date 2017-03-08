@@ -1,15 +1,13 @@
 //! Stolen from dimensioned and modified for unsigned integers
 
-use typenum::{Add1, B1, Length, TArr, ATerm, Len, Integer, Unsigned, U0};
+use typenum::{Add1, B1, Length, TArr, ATerm, Len, Unsigned, U0};
 use generic_array::{GenericArray, ArrayLength};
 use std::ops::Add;
 
 
 pub trait ToGA {
-
     /// The type of the `GenericArray` to which we've converted
     type Output;
-
     /// Create a `GenericArray` of integers from a `TArr` of type numbers.
     fn to_ga() -> Self::Output;
 }
@@ -37,10 +35,8 @@ impl<V, A> ToGA for TArr<V, A>
 }
 
 pub trait AppendFront<T> {
-
     /// The resulting type after performing the append
     type Output;
-
     /// Append `element` to the front of `self`.
     fn append_front(self, element: T) -> Self::Output;
 }

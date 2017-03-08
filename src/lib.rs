@@ -1,4 +1,4 @@
-#[macro_use] extern crate typenum;
+extern crate typenum;
 extern crate generic_array;
 
 use std::ops::*;
