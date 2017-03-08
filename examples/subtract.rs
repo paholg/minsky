@@ -12,9 +12,21 @@ type Instructions = tarr![
     Halt
 ];
 
-type Registers = tarr![U10, U7];
-
 fn main() {
+    type Minuend = U10;
+    type Subtrahend = U7;
+
+    type Registers = tarr![Minuend, Subtrahend];
+    println!("Registers before: {:?}", Registers::to_ga());
+
     type Result = Execute<Registers, Instructions>;
-    println!("{:?}", <Result as ToGA>::to_ga());
+    println!("Registers after: {:?}", <Result as ToGA>::to_ga());
+
+    use minsky::Idx;
+    use typenum::Unsigned;
+    type Difference = Idx<Result, U0>;
+    println!("Computation performed: {} - {} = {:?}",
+             Minuend::to_usize(),
+             Subtrahend::to_usize(),
+             <Difference as Unsigned>::to_usize());
 }
