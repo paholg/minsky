@@ -1,0 +1,9 @@
+[package]
+name = "minsky"
+version = "0.1.0"
+authors = ["Paho Lurie-Gregg <paho@paholg.com>"]
+
+[dependencies]
+  typenum = "*"
+  generic-array = "*"
+
