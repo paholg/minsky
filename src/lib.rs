@@ -56,10 +56,6 @@ pub trait Eval<Instruction> {
 }
 pub type Evaluate<Registers, Instructions, I> = <(Registers, Instructions) as Eval<I>>::Output;
 
-// pub type Inc<Regs, Reg, Ins> = <Regs as Eval<Increment<Reg, Ins>>>::Output;
-// pub type Dec<Regs, Reg, Ins1, Ins2> = <Regs as Eval<Decrement<Reg, Ins1, Ins2>>>::Output;
-// pub type Hal<Regs> = <Regs as Eval<Halt>>::Output;
-
 // Halt
 impl<Registers, Instructions> Eval<Halt> for (Registers, Instructions) {
     type Output = Registers;
