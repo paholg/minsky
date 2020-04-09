@@ -2,8 +2,8 @@
 extern crate typenum;
 extern crate minsky;
 
+use minsky::{Decrement, Execute, Halt, Increment, ToGA};
 use typenum::consts::*;
-use minsky::{Execute, Decrement, Increment, Halt, ToGA};
 
 type Instructions = tarr![
     Decrement<U1, U3, U1>,
@@ -25,8 +25,10 @@ fn main() {
     use minsky::Idx;
     use typenum::Unsigned;
     type Difference = Idx<Result, U0>;
-    println!("Computation performed: {} - {} = {:?}",
-             Minuend::to_usize(),
-             Subtrahend::to_usize(),
-             <Difference as Unsigned>::to_usize());
+    println!(
+        "Computation performed: {} - {} = {:?}",
+        Minuend::to_usize(),
+        Subtrahend::to_usize(),
+        <Difference as Unsigned>::to_usize()
+    );
 }

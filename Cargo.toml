@@ -4,6 +4,6 @@ version = "0.1.0"
 authors = ["Paho Lurie-Gregg <paho@paholg.com>"]
 
 [dependencies]
-  typenum = "*"
-  generic-array = "*"
+  typenum = "1.11.2"
+  generic-array = "0.13.2"
 
