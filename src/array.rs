@@ -1,9 +1,8 @@
 //! Stolen from dimensioned and modified for unsigned integers
 
-use typenum::{Add1, B1, Length, TArr, ATerm, Len, Unsigned, U0};
-use generic_array::{GenericArray, ArrayLength};
+use generic_array::{ArrayLength, GenericArray};
 use std::ops::Add;
-
+use typenum::{ATerm, Add1, Len, Length, TArr, Unsigned, B1, U0};
 
 pub trait ToGA {
     /// The type of the `GenericArray` to which we've converted
@@ -12,21 +11,20 @@ pub trait ToGA {
     fn to_ga() -> Self::Output;
 }
 
-
 impl ToGA for ATerm {
     type Output = GenericArray<usize, U0>;
     fn to_ga() -> Self::Output {
-        GenericArray::new()
+        GenericArray::default()
     }
 }
 
-
 impl<V, A> ToGA for TArr<V, A>
-    where V: Unsigned,
-          A: Len + ToGA,
-          <A as ToGA>::Output: AppendFront<usize>,
-          Length<A>: Add<B1>,
-          Add1<Length<A>>: Unsigned + ArrayLength<usize>
+where
+    V: Unsigned,
+    A: Len + ToGA,
+    <A as ToGA>::Output: AppendFront<usize>,
+    Length<A>: Add<B1>,
+    Add1<Length<A>>: Unsigned + ArrayLength<usize>,
 {
     type Output = <<A as ToGA>::Output as AppendFront<usize>>::Output;
     fn to_ga() -> Self::Output {
@@ -42,13 +40,14 @@ pub trait AppendFront<T> {
 }
 
 impl<T, N> AppendFront<T> for GenericArray<T, N>
-    where T: Default,
-          N: Add<B1> + ArrayLength<T>,
-          Add1<N>: ArrayLength<T>
+where
+    T: Default,
+    N: Add<B1> + ArrayLength<T>,
+    Add1<N>: ArrayLength<T>,
 {
     type Output = GenericArray<T, Add1<N>>;
     fn append_front(self, element: T) -> Self::Output {
-        let mut a = GenericArray::new();
+        let mut a = GenericArray::default();
         a[0] = element;
         for (i, el) in self.into_iter().enumerate() {
             a[i + 1] = el;
